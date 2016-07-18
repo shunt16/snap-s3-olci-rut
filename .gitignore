@@ -1,0 +1,9 @@
+*.pyc
+.settings
+.pydevproject
+.project
+target
+.idea
+*.iml
+__py_cache__/
+
