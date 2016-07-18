@@ -50,6 +50,7 @@ class S3OLCIRutAlgo:
         # 2.	Instrument Simulator
         #######################################################################
         
+        #OLCIRUTv2.0 would include way to differentiate modules - for now use centre as representative of whole instrument
         mod_id = 3
         
         # Estimate Level 0 counts from input Level 1
@@ -70,7 +71,7 @@ class S3OLCIRutAlgo:
         #######################################################################
 
         if self.unc_select[0]:
-            u_noise_2 = X**2 + rad_conf.a_noise[band_id]**2
+            u_noise_2 = X_tot**2 + rad_conf.a_noise[band_id]**2
         else:
             u_noise_2 = 0
 
@@ -170,7 +171,7 @@ class S3OLCIRutAlgo:
         # values given as percentages. Multiplied by 10 and saved to 1 byte(uint8)
         # Clips values to 0-250 --> uncertainty >=25%  assigns a value 250.
         
-        u_1sigma = u_instage + u_diff1age + u_PS + (self.u_diffchar_2 + \
+        u_1sigma = u_instage + u_diff1age + u_diff2age + u_PS + (self.u_diffchar_2 + \
                    self.u_diffmod_2 + self.u_diffalign_2 + u_ccdstab_2 + \
                    self.u_calistr_2 + self.u_postcalistr_2 + self.u_calispec_2 + u_off_2 + \
                    u_INL_2 + u_DNL_2 + u_SGR_2 + u_darkstab_2 + u_noise_2)**0.5
