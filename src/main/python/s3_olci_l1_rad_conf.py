@@ -132,7 +132,7 @@ t_int = 0.042779999999999999
 t_trans = 0.0012210000000000001
 
 
-'''OLCI-RUT parameters'''
+'''OLCI Simulator parameters'''
 #Radiance to CCD signal coefficient [calculated from SCCDB] ()
 C_RSs = array([[  562.57812736,   641.48633438,   583.61417019,   627.96964655,
           703.99765855,   799.82803451,   954.85351526,  1152.9380632 ,
@@ -264,6 +264,14 @@ OCL_steps = array([[ 32.33401198,  32.93278998,  32.38371749,  32.93278998,
 
 #OCL coefficient to propagate smear signal through the VAM [calculated from SCCDB] ()
 OCL_steps_sm = array([ 0.68,  0.68,  0.68,  0.68,  0.68])
+
+#Smear signal at reference radiance, L_ref [TAS OLCI Radiometric Model] (e-)
+X_sm_L_ref = 8.8
+
+#Signal due to TOA radiance value of L_ref [TAS OLCI Radiometric Model] (e-)
+X_ref = array([ 3307.7,  3755.1,  3764.5,  2548.3,  2479. ,  1728. ,  1364.5,
+        1256.8,   937.8,  1103.5,  1073.5,   814.9,   236.3,   285.5,
+         414.3,  1503.3,   751.6,   332.1,   292.1,   224.5,   495.8])
 
 
 '''OLCI unc parameters'''

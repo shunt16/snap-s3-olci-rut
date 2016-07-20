@@ -29,7 +29,7 @@ class S3OLCIRutAlgo:
         self.unc_select = [True, True, True, True, True, True, True, True, True, True, True,
                            True]  # list of booleans with user selected uncertainty sources(order as in interface)
 
-    def unc_calculation(self, band_data, band_id, all_data):
+    def unc_calculation(self, band_data, band_id):
         """
         This function represents the core of the S3 OLCI RUTv1.
         It takes as an input the pixel data of a specific band and tile in
@@ -60,9 +60,11 @@ class S3OLCIRutAlgo:
         X_DS = rad_conf.DSs[mod_id, band_id]
         X_DS_sm = rad_conf.DSs_sm[mod_id]
         
-        X_sm = self.calc_smear_band(all_data)
-        X_sm_tot = X_sm + X_DS_sm
         
+        # V1.0 of S3-OLCI-RUT Planned to make use of better calc_smear_band()
+        # not enough time to fully implement in this version
+        X_sm = rad_conf.X_sm_L_ref/rad_conf.X_ref*X
+
         X_tot = [(X + X_sm + DS)*n_pxl for DS, X, n_pxl in zip(X_DS, X, rad_conf.n_pxls[mod_id,band_id])]/rad_conf.digi_steps[mod_id, band_id]
         X_sm = X_sm/rad_conf.digi_steps_sm[mod_id]
 
