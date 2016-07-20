@@ -1,6 +1,5 @@
 <!--
-  ~ Copyright (C) 2016 Brockmann Consult GmbH (info@brockmann-consult.de)
-  ~ Copyright (C) 2016 Javier Gorrono, National Physical Laboratory (javier.gorrono@npl.co.uk)
+  ~ Copyright (C) 2016 Samuel Hunt, ESA/ESTEC (samuel.hunt@esa.int)
   ~
   ~ This program is free software; you can redistribute it and/or modify it
   ~ under the terms of the GNU General Public License as published by the Free
@@ -17,7 +16,7 @@
 
 <html>
 <head>
-    <title>S2-RUT</title>
+    <title>S3-OLCI-RUT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,7 +24,7 @@
 <body>
 <table class="header">
     <tr class="header">
-        <td class="header">S2-RUT Processor Documentation</td>
+        <td class="header">S3-OLCI-RUT Processor Documentation</td>
         <td class="header" align="right"><img src="images/snap_header.jpg" border=0></td>
     </tr>
 </table>
@@ -33,15 +32,15 @@
 <h3>User Interface</h3>
 
 <p>
-    The S2-RUT processor can be invoked in the Sentinel Toolbox from the menu by selecting
-    <b>Optical->Preprocessing->Sentinel-2 Radiometric Uncertainty Tool</b>.
+    The S3-OLCI-RUT processor can be invoked in the Sentinel Toolbox from the menu by selecting
+    <b>Optical->Preprocessing->Sentinel-3 OLCI Radiometric Uncertainty Tool</b>.
     On the command line processor is available by means of the Graph Processing Tool <code>gpt</code>
     which is located in the Sentinel Toolbox <code>bin</code> directory.
-    Typing <code>gpt S2Rut -h</code> displays further information.
+    Typing <code>gpt S3OLCIRut -h</code> displays further information.
 </p>
 
 <p>
-    Selecting the <b>Sentinel-2 Radiometric Uncertainty Tool</b> command from the Sentinel Toolbox menu opens up the
+    Selecting the <b>Sentinel-3 OLCI Radiometric Uncertainty Tool</b> command from the Sentinel Toolbox menu opens up the
     following dialog:
 </p>
 
@@ -54,7 +53,7 @@
     Here the user specifies the source product.
     The combo box presents a list of all products opened in the Sentinel Toolbox.
     The user may select one of these or, by clicking on the button next to the combo box, choose a product
-    from the file system. The selected product must be of type <b>S2_MSI_Level-1C</b>.
+    from the file system. The selected product must be of type <b>S3_OLCI_Level-1B</b>.
 </p>
 
 <h5>Target Product Group</h5>
@@ -89,40 +88,53 @@
     <b>Band names:</b> Select the bands for which the uncertainty shall be computed.
 </p>
 <p class="i1">
-    <b>Instrument noise:</b> Noise (shot, thermal, etc.) introduced by the silicon and CMT detectors of the MSI instrument
+    <b>Instrument noise:</b> Noise (shot, thermal, etc.) introduced by the CCD and VAM of the instrument
 </p>
 <p class="i1">
-    <b>OOF straylight-systematic:</b> Telescope Out-Of-Field light that results in a positive bias
+    <b>Instrument aging:</b> Uncertainty caused by instrument aging between calibrations
 </p>
 <p class="i1">
-    <b>OOF straylight-random:</b> Focal plane Out-Of-Field light that results in a random spatial dispersion
+    <b>CCD Stability:</b> CCD response stability uncertainty
 </p>
 <p class="i1">
-    <b>Crosstalk:</b> Focal plane (Optical) and Front-End Electronics (electrical) inter-band signal
+    <b>Periodic signal error:</b> Error caused by uncorrected Period Signal
 </p>
 <p class="i1">
-    <b>ADC quantisation:</b> Analog to Digital conversion at the Video Chain Unit on-board the MSI
+    <b>Diffuser characterisation:</b> Calibration diffuser characterisation measurement uncertainty
 </p>
 <p class="i1">
-    <b>DS stability:</b> Residual thermal fluctuations of the detector offset along the orbit
+    <b>Diffuser modelisation:</b> Calibration diffuser BRDF modelisation uncertainty
 </p>
 <p class="i1">
-    <b>Gamma knowledge:</b> Knowledge on te correction for non-linearity and non-uniformity
+    <b>Diffuser alignment:</b> Uncertainty caused by variation in sun incidence angle on to the diffuser
 </p>
 <p class="i1">
-    <b>Diffuser-absolute knowledge:</b> Knowledge on the diffuser reflectance factor (BRF)
+    <b>Calibration diffuser straylight:</b> Uncertainty caused by straylight within calibration mechanism affecting the BRDF modelisation
 </p>
 <p class="i1">
-    <b>Diffuser-temporal knowledge:</b> Estimated effect of the diffuser degradation in space
+    <b>Calibration camera straylight:</b> Camera stralight during calibration uncertainty
 </p>
 <p class="i1">
-    <b>Diffuser-cosine effect:</b> Cosine correction knowledge as a consequence of angular noise TBD
+    <b>Calibration diffuser aging:</b> Uncertainty due to aging of the calibration diffuser
 </p>
 <p class="i1">
-    <b>Diffuser-straylight_residual:</b> Residual for the correction of the stray-light during in-flight diffuser calibration
+    <b>Reference diffuser aging:</b> Uncertainty due to aging of the reference diffuser
 </p>
 <p class="i1">
-    <b>L1C image quantisation:</b> Effect of the finite resolution of the L1C reflectance factor
+    <b>Video chain non-linearity:</b> Video chain non-linearity correction uncertainty
+</p>
+<p class="i1">
+    <b>ADC Non-Linearity:</b> Uncertainty from non-linaerity in the ADC qunatisation process
+</p>
+<p class="i1">
+    <b>Offset compensation:</b> Uncertainty from offset compensation loop clamping stability
+</p>
+<p class="i1">
+    <b>Dark stability:</b> Dark signal stability uncertainty
+</p>
+
+<p class="i1">
+    <b>Smear gain compensation:</b> Uncertainty due to lack of smear gain knowledge
 </p>
 
 <br>
