@@ -10,7 +10,7 @@ First the following tools are needed at least:
 
 Clone or fork the repository at [GitHub](https://github.com/shunt16/snap-s3-olci-rut)
 ```
-> git clone https://github.com/senbox-org/snap-rut.git
+> git clone https://github.com/senbox-org/snap-s3-olci-rut.git
 > cd snap-s3-olci-rut
 ```
 
