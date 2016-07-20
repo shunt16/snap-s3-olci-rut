@@ -5,13 +5,13 @@
             <file name="RutAction.instance">
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
                 <attr name="delegate" methodvalue="org.esa.snap.core.gpf.ui.DefaultOperatorAction.create"/>
-                <attr name="operatorName" stringvalue="S2RutOp"/>
-                <attr name="displayName" stringvalue="Sentinel-2 Radiometric Uncertainty Tool"/>
-                <attr name="dialogTitle" stringvalue="Sentinel-2 Radiometric Uncertainty Tool"/>
+                <attr name="operatorName" stringvalue="S3OLCIRutOp"/>
+                <attr name="displayName" stringvalue="Sentinel-3 OLCI Radiometric Uncertainty Tool"/>
+                <attr name="dialogTitle" stringvalue="Sentinel-3 OLCI Radiometric Uncertainty Tool"/>
                 <attr name="targetProductNameSuffix" stringvalue="_rut"/>
                 <attr name="ShortDescription"
                       stringvalue="Radiometric uncertainty propagation for optical level-1 radiance data"/>
-                <attr name="helpId" stringvalue="s2rutDoc"/>
+                <attr name="helpId" stringvalue="s3olcirutDoc"/>
             </file>
         </folder>
     </folder>
