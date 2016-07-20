@@ -56,13 +56,12 @@ class S3OLCIRutAlgo:
         # Estimate Level 0 counts from input Level 1
         X = band_data * rad_conf.C_RSs[mod_id, band_id] # propagate to CCD
 
-        # Calculate and store smear band and DS and add to signal
+        # Open dark signal estimate values
         X_DS = rad_conf.DSs[mod_id, band_id]
-        X_DS_sm = rad_conf.DSs_sm[mod_id]
         
-        
-        # V1.0 of S3-OLCI-RUT Planned to make use of better calc_smear_band()
-        # not enough time to fully implement in this version
+        # Estimate smear band value
+        # (V1.0 of S3-OLCI-RUT Planned to make use of better calc_smear_band()
+        # not enough time to fully implement in this version)
         X_sm = rad_conf.X_sm_L_ref/rad_conf.X_ref*X
 
         X_tot = [(X + X_sm + DS)*n_pxl for DS, X, n_pxl in zip(X_DS, X, rad_conf.n_pxls[mod_id,band_id])]/rad_conf.digi_steps[mod_id, band_id]
@@ -192,7 +191,7 @@ class S3OLCIRutAlgo:
         return u_ref
     
     def calc_smear_band(self, all_data):
-        
+        ### NOT CURRENT IN USE - TO BE UPDATED FOR V1.0###
         # Initialise arrays
         smear_band = np.array([])
         pre_Xsm = np.array([])

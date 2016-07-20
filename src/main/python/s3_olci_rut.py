@@ -61,7 +61,7 @@ class S3OLCIRutOp:
         toa_band_id = source_band.getSpectralBandIndex() - 1
 
         toa_tile = context.getSourceTile(source_band, tile.getRectangle())
-        toa_samples = toa_tile.getSamplesInt()
+        toa_samples = toa_tile.getSamplesFloat()
 
         # this is the core where the uncertainty calculation should grow
         unc = self.rut_algo.unc_calculation(np.array(toa_samples, dtype=np.uint16), toa_band_id)
