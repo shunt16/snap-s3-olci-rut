@@ -13,4 +13,4 @@
 # (a)  water/mci.py  where mci.py defines the MciOp class
 # (b)  water/mci/__init__.py  where __init__.py defines the MciOp class
 
-s2_rut.S2RutOp
+s3_olci_rut.S3OLCIRutOp
