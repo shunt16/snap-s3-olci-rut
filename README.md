@@ -8,7 +8,7 @@ First the following tools are needed at least:
 - Build tool [Maven](http://maven.apache.org/) must be installed (version 3 or later)
 
 
-Clone or fork the repository at [GitHub](https://github.com/senbox-org/snap-rut)
+Clone or fork the repository at [GitHub](https://github.com/shunt16/snap-s3-olci-rut)
 ```
 > git clone https://github.com/senbox-org/snap-rut.git
 > cd snap-s3-olci-rut
