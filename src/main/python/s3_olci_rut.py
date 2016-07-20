@@ -52,7 +52,6 @@ class S3OLCIRutOp:
             unc_toa_band.setNoDataValueUsed(True)
             rut_product.addBand(unc_toa_band)
             self.sourceBandMap[unc_toa_band] = source_band
-            snappy.ProductUtils.copyGeoCoding(source_band, unc_toa_band)
 
         context.setTargetProduct(rut_product)
 

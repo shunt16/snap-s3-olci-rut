@@ -6,7 +6,6 @@ Created on Thurs May 26 17:51:33 2016
 """
 
 import numpy as np
-
 import s3_olci_l1_rad_conf as rad_conf
 
 
@@ -92,7 +91,7 @@ class S3OLCIRutAlgo:
             u_PS = 0 
         
         #######################################################################
-        # 4.    L1b uncertainty contributors: absolute calibration coefficient
+        # 4.    L1B uncertainty contributors: absolute calibration coefficient
         #######################################################################
         
         if not self.unc_select[3]:
@@ -178,15 +177,6 @@ class S3OLCIRutAlgo:
                    u_INL_2 + u_DNL_2 + u_SGR_2 + u_darkstab_2 + u_noise_2)**0.5
         u_expand = 10 * (self.k * u_1sigma)
         u_ref = np.uint8(np.clip(u_expand, 0, 250))
-
-        #######################################################################        
-        # 10.	Append uncertainty information to the metadata
-        #######################################################################         
-        # Here the metadata relevant to the uncertainty image created is added
-        # Rad_uncertainty_info [BandId]--> Mean, std. dev, median and
-        # quantile_info_list[5% steps]
-
-        # granule_meta.addElement()
 
         return u_ref
     
