@@ -50,7 +50,7 @@ Then
 * restart SNAP.
 * 
 Once the S3-OLCI-RUT processor is installed into SNAP it can be run from the SNAP Desktop UI's main menu at
-**Optical / Preprocessing / Sentinel-2 Radiometric Uncertainty Tool**
+**Optical / Preprocessing / Sentinel-3 OLCI Radiometric Uncertainty Tool**
   
 Or in batch mode using SNAP's `gpt` command-line tool found in `${SNAP_HOME}/bin`:
 ```
