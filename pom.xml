@@ -21,11 +21,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.esa.snap</groupId>
-    <artifactId>snap-rut</artifactId>
-    <version>0.10-SNAPSHOT</version>
+    <artifactId>s3-olci-rut</artifactId>
+    <version>0.0</version>
     <packaging>nbm</packaging>
-    <name>S2 Radiometric Uncertainty Tool</name>
-    <description>Radiometric uncertainty propagation for optical Sentinel-2 L1C MSI radiance data</description>
+    <name>S3 OLCI Radiometric Uncertainty Tool</name>
+    <description>Radiometric uncertainty propagation for optical Sentinel-3 L1B OLCI radiance data</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
