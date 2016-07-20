@@ -11,7 +11,7 @@ import numpy as np
 import datetime
 import s3_olci_l1_rad_conf as rad_conf
 
-S3_OLCI_TYPE_STRING = 'S3_OLCI_Level-1B'
+S3_OLCI_TYPE_STRING = 'S3A_OL_1_EFR'
 
 class S3OLCIRutOp:
     def __init__(self):
