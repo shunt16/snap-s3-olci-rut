@@ -26,7 +26,8 @@ class S3OLCIRutAlgo:
         self.k = 1
 
         self.unc_select = [True, True, True, True, True, True, True, True, True, True, True,
-                           True]  # list of booleans with user selected uncertainty sources(order as in interface)
+                           True, True, True, True, True] 
+        # list of booleans with user selected uncertainty sources(order as in interface)
 
     def unc_calculation(self, band_data, band_id):
         """
@@ -61,9 +62,10 @@ class S3OLCIRutAlgo:
         # Estimate smear band value
         # (V1.0 of S3-OLCI-RUT Planned to make use of better calc_smear_band()
         # not enough time to fully implement in this version)
-        X_sm = rad_conf.X_sm_L_ref/rad_conf.X_ref*X
-
-        X_tot = [(X + X_sm + DS)*n_pxl for DS, X, n_pxl in zip(X_DS, X, rad_conf.n_pxls[mod_id,band_id])]/rad_conf.digi_steps[mod_id, band_id]
+        X_sm = rad_conf.X_sm_L_ref/rad_conf.X_ref[band_id]*X
+        
+        #Combine and convert to counts
+        X_tot = X + X_sm + X_DS * rad_conf.n_pxls[mod_id,band_id] / rad_conf.digi_steps[mod_id, band_id]
         X_sm = X_sm/rad_conf.digi_steps_sm[mod_id]
 
         #######################################################################        
@@ -71,7 +73,7 @@ class S3OLCIRutAlgo:
         #######################################################################
 
         if self.unc_select[0]:
-            u_noise_2 = X_tot**2 + rad_conf.a_noise[band_id]**2
+            u_noise_2 = ((X_tot + rad_conf.a_noise[mod_id, band_id]**2)**0.5/X_tot*100)**2
         else:
             u_noise_2 = 0
 
@@ -81,12 +83,12 @@ class S3OLCIRutAlgo:
             u_instage = 0    
 
         if self.unc_select[1]:
-            u_ccdstab_2 = rad_conf.u_ccdstab_2[band_id]
+            u_ccdstab_2 = rad_conf.u_ccdstab_2[mod_id, band_id]
         else:
             u_ccdstab_2 = 0    
 
         if self.unc_select[2]:
-            u_PS = (rad_conf.a_PS * X**-2 + rad_conf.b_PS)**0.5
+            u_PS = (rad_conf.a_PS[mod_id, band_id] * X**-2 + rad_conf.b_PS[mod_id, band_id])**0.5
         else:
             u_PS = 0 
         
@@ -113,12 +115,12 @@ class S3OLCIRutAlgo:
             self.u_calispeck_2 = 0  # predefined but updated to 0 if deselected by user
             
         if self.unc_select[9]:
-            u_diff1age = rad_conf.u_diff1age[band_id]
+            u_diff1age = rad_conf.u_diff1age[mod_id, band_id]
         else:
             u_diff1age = 0
             
         if self.unc_select[10]:
-            u_diff2age = rad_conf.u_diff2age[band_id]
+            u_diff2age = rad_conf.u_diff2age[mod_id, band_id]
         else:
             u_diff2age = 0
         
@@ -127,12 +129,12 @@ class S3OLCIRutAlgo:
         #######################################################################        
 
         if self.unc_select[11]:
-            u_INL_2 = rad_conf.a_INL(rad_conf.b_INL[band_id]((X_sm/X)**2+rad_conf.c_INL[band_id])+((X_tot/X)**2+rad_conf.d_INL[band_id]))
+            u_INL_2 = rad_conf.a_INL*(rad_conf.b_INL[mod_id, band_id]*((X_sm/X)**2+rad_conf.c_INL[mod_id, band_id])+((X_tot/X)**2+rad_conf.d_INL[mod_id, band_id]))
         else:
             u_INL_2 = 0
             
         if self.unc_select[12]:
-            u_DNL_2 = rad_conf.a_DNL[band_id] * X**-2  + rad_conf.b_DNL[band_id]
+            u_DNL_2 = rad_conf.a_DNL[mod_id, band_id] * X**-2  + rad_conf.b_DNL[mod_id, band_id]
         else:
             u_DNL_2 = 0
 
@@ -140,13 +142,13 @@ class S3OLCIRutAlgo:
         # 6.	L1B uncertainty contributors: dark signal correction
         #######################################################################
 
-        if self.unc_select[7]:
-            u_off_2 = rad_conf.a_off * X**-2 + rad_conf.b_off
+        if self.unc_select[13]:
+            u_off_2 = rad_conf.a_off[mod_id, band_id] * X**-2 + rad_conf.b_off[mod_id, band_id]
         else:
             u_off_2 = 0
             
-        if self.unc_select[7]:
-            u_darkstab_2 = rad_conf.a_darkstab * X**-2
+        if self.unc_select[14]:
+            u_darkstab_2 = rad_conf.a_darkstab[mod_id, band_id] * X**-2
         else:
             u_darkstab_2 = 0
 
@@ -154,8 +156,8 @@ class S3OLCIRutAlgo:
         # 7.    L1B uncertainty contributors: smear correction
         #######################################################################
 
-        if self.unc_select[7]:
-            u_SGR_2 = rad_conf.a_SGR((X_sm/X)+rad_conf.b_SGR)**2+rad_conf.c_SGR((X_sm/X)**2+rad_conf.b_SGR**2)
+        if self.unc_select[15]:
+            u_SGR_2 = rad_conf.a_SGR[mod_id, band_id]*((X_sm/X)+rad_conf.b_SGR[mod_id, band_id])**2+rad_conf.c_SGR[mod_id, band_id]*((X_sm/X)**2+rad_conf.b_SGR[mod_id, band_id]**2)
         else:
             u_SGR_2 = 0
 
@@ -173,8 +175,9 @@ class S3OLCIRutAlgo:
         
         u_1sigma = u_instage + u_diff1age + u_diff2age + u_PS + (self.u_diffchar_2 + \
                    self.u_diffmod_2 + self.u_diffalign_2 + u_ccdstab_2 + \
-                   self.u_calistr_2 + self.u_postcalistr_2 + self.u_calispec_2 + u_off_2 + \
+                   self.u_calistr_2 + self.u_postcalistr_2 + self.u_calispeck_2 + u_off_2 + \
                    u_INL_2 + u_DNL_2 + u_SGR_2 + u_darkstab_2 + u_noise_2)**0.5
+
         u_expand = 10 * (self.k * u_1sigma)
         u_ref = np.uint8(np.clip(u_expand, 0, 250))
 

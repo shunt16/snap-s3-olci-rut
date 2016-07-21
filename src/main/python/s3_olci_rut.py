@@ -75,7 +75,8 @@ class S3OLCIRutOp:
                  context.getParameter('CCD_stability'), context.getParameter('Period_signal_error'),
                  context.getParameter('Diffuser_characterisation'), context.getParameter('Diffuser_modelisation'),
                  context.getParameter('Diffuser_alignment'), context.getParameter('Calibration_diffuser_straylight'),
-                 context.getParameter('Calibration_camera_straylight'), context.getParameter('Calibration_diffuser_aging'),
-                 context.getParameter('Reference_diffuser_aging'), context.getParameter('Video_chain_non-linearity'),
-                 context.getParameter('ADC_non-linearity'), context.getParameter('Offset_compensation'),
-                 context.getParameter('Dark_stability'), context.getParameter('Smear_gain_compensation')])
+                 context.getParameter('Calibration_camera_straylight'), context.getParameter('Calibration_speckle'),
+                 context.getParameter('Calibration_diffuser_aging'), context.getParameter('Reference_diffuser_aging'),
+                 context.getParameter('Video_chain_non-linearity'), context.getParameter('ADC_non-linearity'),
+                 context.getParameter('Offset_compensation'), context.getParameter('Dark_stability'),
+                 context.getParameter('Smear_gain_compensation')])
