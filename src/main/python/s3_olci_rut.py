@@ -65,6 +65,9 @@ class S3OLCIRutOp:
 
     def get_k(self, context):
         return (context.getParameter('coverage_factor'))
+        
+    def dispose(self, context):
+        pass
 
     def get_unc_select(self, context):
         return ([context.getParameter('Instrument_noise'), context.getParameter('Instrument_aging'),
