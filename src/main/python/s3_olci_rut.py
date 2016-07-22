@@ -16,8 +16,6 @@ S3_OLCI_TYPE_STRING = 'S3A_OL_1_EFR'
 class S3OLCIRutOp:
     def __init__(self):
         self.source_product = None
-        self.product_meta = None
-        self.datastrip_meta = None
         self.rut_algo = s3_olci_rut_algo.S3OLCIRutAlgo()
         self.unc_band = None
         self.time_init = datetime.datetime(2016, 2, 16, 10, 00)  # S3A launch date 16-feb-2016, time is indifferent
@@ -28,8 +26,6 @@ class S3OLCIRutOp:
 
         if self.source_product.getProductType() != S3_OLCI_TYPE_STRING:
             raise RuntimeError('Source product must be of type "' + S3_OLCI_TYPE_STRING + '"')
-
-        self.product_meta, self.datastrip_meta, granules_meta = self.source_product.getMetadataRoot().getElements()
 
         # todo - check if there is a granule
 
