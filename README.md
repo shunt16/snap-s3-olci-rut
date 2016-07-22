@@ -38,6 +38,8 @@ The build creates a SNAP plugin module file `<project_dir>/target/nbm/snap-s3-ol
 
 ## How to install and run the processor as SNAP plugin
 
+First ensure Python 3 is installed with the snappy and numpy modules. 
+
 Start SNAP (Desktop UI) and find the plugin manager in the main menu at 
 > **Tools / Plugins**
 
